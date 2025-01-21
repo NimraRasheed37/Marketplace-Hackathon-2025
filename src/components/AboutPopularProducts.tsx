@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function PopularProducts() {
   const products = [
-    {
+    { 
       id: 1,
       name: "The Poplar suede sofa",
       price: "$99.00",
