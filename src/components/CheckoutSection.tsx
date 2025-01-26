@@ -2,9 +2,10 @@
 
 import React, { useState } from 'react';
 import { useCart } from '@/context/CartContext';
+import { client } from '@/sanity/lib/client';
 
 export default function CheckoutSection() {
-  const { cartItems } = useCart();
+  const { cartItems, clearCart } = useCart();
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -34,13 +35,50 @@ export default function CheckoutSection() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!validatePaymentDetails()) {
       setErrorMessage('Please fill in the required payment details.');
       return;
     }
-    setIsOrderPlaced(true);
+
+    try {
+      // Create or update customer
+      const customer = await client.createOrReplace({
+        _type: 'customers',
+        _id: formData.fullName, // Use email as the document ID
+        fullName: formData.fullName,
+        email: formData.email,
+        phone: formData.phone,
+        address: formData.address,
+        city: formData.city,
+        country: formData.country,
+        zipCode: formData.zipCode,
+      });
+
+      // Create order 
+      const order = await client.create({
+        _type: 'orders',
+        customerId: {
+          _type: 'reference',
+          _ref: customer._id,
+        },
+        orderDate: new Date().toISOString(),
+        billingMethod: formData.billingMethod,
+        totalAmount: totalBill,
+        items: cartItems.map(item => ({
+          name: item.title,
+          quantity: item.quantity,
+          price: item.price,
+        })),
+      });
+
+      setIsOrderPlaced(true);
+      clearCart(); // Clear the cart after placing the order
+    } catch (error) {
+      console.error('Error placing order:', error);
+      setErrorMessage('Failed to place order. Please try again.');
+    }
   };
 
   const validatePaymentDetails = () => {
