@@ -58,13 +58,13 @@ export default function CartBag() {
                     </div>
                     <div className="flex justify-start items-center gap-2 sm:gap-4">
                       <button
-                        className="p-2 bg-transparent hover:bg-gray-200 rounded-full border-transparent border-2 hover:border-[#029FAE]"
+                        className="w-8 h-8 flex items-center justify-center p-2 bg-transparent hover:text-[#029FAE] font-medium hover:bg-gray-200 rounded-full border-transparent border-2 hover:border-[#029FAE]"
                         onClick={() => handleDecrease(item.id, item.quantity)}
                       >
                         -
                       </button>
                       <button
-                        className="p-2 bg-transparent hover:bg-gray-200 rounded-full border-transparent border-2 hover:border-[#029FAE]"
+                        className="w-8 h-8 flex items-center justify-center p-2 bg-transparent hover:text-[#029FAE] font-medium hover:bg-gray-200 rounded-full border-transparent border-2 hover:border-[#029FAE]"
                         onClick={() => updateCartQuantity(item.id, item.quantity + 1)}
                       >
                         +
@@ -99,13 +99,22 @@ export default function CartBag() {
             <p className="text-base font-medium text-[#111111]">Total</p>
             <p className="text-base font-medium text-[#111111]">${calculateTotal().toFixed(2)}</p>
           </div>
-          <Link
-          href="/pages/checkout"
-          >
-          <button className="w-full bg-[#00A9A9] text-white text-center font-medium text-sm py-3 md:w-[334] h-[64] rounded-full hover:bg-[#008f8f] transition mt-8">
-            {cartItems.length ? 'Member Checkout' : 'Shop Now'}
-          </button>
-          </Link>
+
+          <div className="flex justify-center">
+          {cartItems.length ? (
+            <Link href="/pages/checkout" passHref>
+              <button className="w-full bg-[#00A9A9] text-white text-center font-medium text-sm py-2 md:w-[334px] h-[64px] rounded-full hover:bg-[#008f8f] transition mt-8">
+                Member Checkout
+              </button>
+            </Link>
+          ) : (
+            <Link href="/pages/product" passHref>
+              <button className="w-full  bg-[#00A9A9] text-white text-center font-medium text-sm py-2 md:w-[334px] h-[62px] rounded-full hover:bg-[#008f8f] transition mt-8">
+                Shop Now
+              </button>
+            </Link>
+          )}
+          </div>
         </div>
       </div>
     </>

@@ -73,6 +73,10 @@ export default function CheckoutSection() {
         })),
       });
 
+      //temprory solution to solve build error, change it later
+      console.log('Order placed:', order);
+
+
       setIsOrderPlaced(true);
       clearCart(); // Clear the cart after placing the order
     } catch (error) {
