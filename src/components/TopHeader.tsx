@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { FaBars } from "react-icons/fa";
+import { FaBars, FaUser } from "react-icons/fa";
 
 export default function TopHeader() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -46,6 +46,11 @@ export default function TopHeader() {
                   height={16}
                 />
                 Need Help
+              </li>
+            </Link>
+            <Link href="/pages/login">
+              <li className="flex justify-center gap-2 hover:text-gray-300">
+              <FaUser className="text-white" />
               </li>
             </Link>
           </ul>

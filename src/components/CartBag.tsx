@@ -82,7 +82,7 @@ export default function CartBag() {
             </div>
           )}
         </div>
-        <div className="w-full md:w-[40%] gap-4">
+        <div className="w-full lg:w-[40%] gap-4">
           <h1 className="text-[#111111] font-medium text-md my-4 sm:text-[22px] mb-6">
             Summary
           </h1>
@@ -100,16 +100,16 @@ export default function CartBag() {
             <p className="text-base font-medium text-[#111111]">${calculateTotal().toFixed(2)}</p>
           </div>
 
-          <div className="flex justify-center">
+          <div className="flex justify-center ">
           {cartItems.length ? (
             <Link href="/pages/checkout" passHref>
-              <button className="w-full bg-[#00A9A9] text-white text-center font-medium text-sm py-2 md:w-[334px] h-[64px] rounded-full hover:bg-[#008f8f] transition mt-8">
+              <button className=" bg-[#00A9A9] text-white text-center font-medium text-sm py-2 w-[330px] h-[64px] rounded-full hover:bg-[#008f8f] transition mt-8">
                 Member Checkout
               </button>
             </Link>
           ) : (
             <Link href="/pages/product" passHref>
-              <button className="w-full  bg-[#00A9A9] text-white text-center font-medium text-sm py-2 md:w-[334px] h-[62px] rounded-full hover:bg-[#008f8f] transition mt-8">
+              <button className=" bg-[#00A9A9] text-white text-center font-medium text-sm py-2 w-[330px] h-[62px] rounded-full hover:bg-[#008f8f] transition mt-8">
                 Shop Now
               </button>
             </Link>
