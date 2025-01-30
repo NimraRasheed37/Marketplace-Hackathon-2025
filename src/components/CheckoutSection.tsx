@@ -55,14 +55,12 @@ export default function CheckoutSection() {
         country: formData.country,
         zipCode: formData.zipCode,
       });
-
+      console.log('Customer Data:', customer);
+      
       // Create order 
       const order = await client.create({
         _type: 'orders',
-        fullName: {
-          _type: 'reference',
-          _ref: customer._id,
-        },
+        customerName: formData.fullName, // Save fullName of customer as customerName
         orderDate: new Date().toISOString(),
         billingMethod: formData.billingMethod,
         totalAmount: totalBill,
