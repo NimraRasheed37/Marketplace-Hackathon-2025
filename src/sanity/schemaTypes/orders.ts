@@ -5,7 +5,7 @@ export const orderSchema = defineType( {
     title: 'Orders',
     type: 'document',
     fields: [
-      { name: 'customerId', title: 'Customer ID', type: 'reference', to: [{ type: 'customers' }] },
+     { name: 'fullName', title: 'Full Name',  type: 'reference', to: [{ type: 'customers' }] },
       { name: 'orderDate', title: 'Order Date', type: 'datetime', initialValue: () => new Date().toISOString() },
       { name: 'billingMethod', title: 'Billing Method', type: 'string' },
       { name: 'totalAmount', title: 'Total Amount', type: 'number' },
