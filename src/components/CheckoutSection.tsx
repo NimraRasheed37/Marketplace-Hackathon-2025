@@ -59,7 +59,7 @@ export default function CheckoutSection() {
       // Create order 
       const order = await client.create({
         _type: 'orders',
-        customerId: {
+        fullName: {
           _type: 'reference',
           _ref: customer._id,
         },
